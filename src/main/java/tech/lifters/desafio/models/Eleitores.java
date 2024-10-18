@@ -1,6 +1,8 @@
 package tech.lifters.desafio.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.xml.bind.annotation.XmlRootElement;
@@ -21,9 +23,10 @@ import java.util.UUID;
 @XmlRootElement(name = "Eleitores")
 public class Eleitores {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id; 
     private String nome;
-    private Integer cpf;
+    private String cpf;
     private LocalDateTime criadoEm;
     private LocalDateTime alteradoEm;
     private LocalDateTime deletadoEm;

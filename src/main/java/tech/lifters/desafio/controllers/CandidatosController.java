@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+// import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import tech.lifters.desafio.models.Candidatos;
 import tech.lifters.desafio.repositories.CandidatosRepo;
 
@@ -37,7 +37,7 @@ public class CandidatosController {
 
     @PostMapping("/candidatos")
     public Candidatos addCandidatos(@RequestBody Candidatos candidatos) {
-        candidatos.setId(UUID.randomUUID());
+        // candidatos.setId(UUID.randomUUID());
         Candidatos newCandidatos = repository.save(candidatos);
         return newCandidatos;
     }

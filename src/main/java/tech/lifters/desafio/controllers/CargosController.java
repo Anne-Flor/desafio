@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+// import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import tech.lifters.desafio.models.Cargos;
 import tech.lifters.desafio.repositories.CargosRepo;
 
@@ -37,7 +39,6 @@ public class CargosController {
 
     @PostMapping("/cargos")
     public Cargos addCargos(@RequestBody Cargos cargos) {
-        cargos.setId(UUID.randomUUID());
         Cargos newCargos = repository.save(cargos);
         return newCargos;
     }

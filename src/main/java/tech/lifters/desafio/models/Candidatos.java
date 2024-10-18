@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
@@ -22,6 +24,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "Candidatos")
 public class Candidatos {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id; 
     private String nome;
     private Integer numero; 

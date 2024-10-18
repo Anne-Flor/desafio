@@ -6,9 +6,8 @@ import tech.lifters.desafio.models.Votos;
 import tech.lifters.desafio.models.VotosId;
 
 import java.util.UUID;
-import java.util.Optional;
+import java.time.LocalDateTime;
 
-// import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -29,7 +27,9 @@ import tech.lifters.desafio.repositories.VotosRepo;
 public class EleitoresController {
     @Autowired
     private EleitoresRepo repository;
+    @Autowired
     private CandidatosRepo CandidatosRepo;
+    @Autowired
     private VotosRepo VotosRepo;
 
     public EleitoresController(EleitoresRepo repository) {
@@ -37,14 +37,16 @@ public class EleitoresController {
     }
 
     @PostMapping("/eleitores/{eleitoresId}/votar")
-    public Optional<Votos> votar(@PathVariable UUID eleitoresId, @RequestBody UUID candidatosId) {
+    public Votos votar(@PathVariable UUID eleitoresId, @RequestBody UUID candidatosId) {
         Eleitores eleitores = repository.findById(eleitoresId)
             .orElseThrow(() -> new RuntimeException("Eleitores id not found - " + eleitoresId));
         Candidatos candidatos = CandidatosRepo.findById(candidatosId)
             .orElseThrow(() -> new RuntimeException("Candidatos id not found - " + candidatosId));
         VotosId votoId = new VotosId(candidatos, eleitores);
-        Optional<Votos> voto = VotosRepo.findById(votoId);
-        return voto;
+        Votos voto = new Votos(votoId, LocalDateTime.now());
+        Votos votos = VotosRepo.save(voto);
+
+        return votos;
     }
 
     @GetMapping("/eleitores")
