@@ -3,6 +3,7 @@ package tech.lifters.desafio.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Eleitores")
+@XmlRootElement(name = "Eleitores")
 public class Eleitores {
     @Id
     private UUID id; 
@@ -25,6 +27,7 @@ public class Eleitores {
     private LocalDateTime criadoEm;
     private LocalDateTime alteradoEm;
     private LocalDateTime deletadoEm;
+
 }
 
 
